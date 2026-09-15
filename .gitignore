@@ -1,0 +1,19 @@
+# Virtual Environments
+venv/
+.venv/
+env/
+
+# Python cache & artifacts
+__pycache__/
+*.py[cod]
+
+# OS files
+.DS_Store
+.directory
+
+# Uploads & Media
+backend/uploads/
+*.mp4
+*.m4v
+*.mov
+*.avi

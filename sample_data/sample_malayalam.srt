@@ -1,0 +1,23 @@
+1
+00:00:05,000 --> 00:00:15,000
+Welcome to this tutorial on AI Video Transcript Chatbots using Retrieval-Augmented Generation (RAG).
+
+2
+00:00:16,000 --> 00:00:30,000
+ഈ വീഡിയോയിൽ നമ്മൾ മലയാളം, ഇംഗ്ലീഷ്, ഹിന്ദി, തമിഴ് ഭാഷകളിലുള്ള യൂട്യൂബ് വീഡിയോ ട്രാൻസ്‌ക്രിപ്റ്റ് ഉപയോഗിച്ച് AI ചോദ്യോത്തരങ്ങൾ എങ്ങനെ നിർമ്മിക്കാം എന്ന് പഠിക്കുന്നു.
+
+3
+00:00:31,000 --> 00:00:45,000
+यह सिस्टम आपको वीडियो देखने के दौरान सीधे सवाल पूछने और सटीक टाइमस्टैम्प (timestamp) उत्तर प्राप्त करने की अनुमति देता है।
+
+4
+00:00:46,000 --> 00:01:00,000
+இந்த தொழில்நுட்பம் Qwen 2.5 AI மாதிரி மற்றும் Ollama உள்ளூர் சேவையகம் மூலம் இலவசமாக இயங்குகிறது.
+
+5
+00:01:01,000 --> 00:01:20,000
+The vector embeddings engine extracts timestamps such as 01:05 and 01:15 so you can click any timestamp in the chat to jump the YouTube player automatically.
+
+6
+00:01:21,000 --> 00:01:45,000
+Qwen 2.5 AI മോഡൽ സൗജന്യമായി Ollama വഴി local ആയി പ്രവർത്തിപ്പിക്കാം അല്ലെങ്കിൽ OpenRouter free tier API key ഉപയോഗിച്ച് ടെസ്റ്റ് ചെയ്യാം.
