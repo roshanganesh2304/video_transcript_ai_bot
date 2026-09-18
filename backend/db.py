@@ -58,7 +58,7 @@ class PostgresDBManager:
     def get_connection(self):
         """Attempts to open a connection to the PostgreSQL database."""
         try:
-            conn = psycopg2.connect(self.db_url)
+            conn = psycopg2.connect(self.db_url, client_encoding="utf-8")
             return conn
         except Exception as e:
             logger.warning(f"Could not connect to PostgreSQL database ({e}).")
@@ -202,6 +202,8 @@ class PostgresDBManager:
                 cursor.close()
                 conn.close()
                 video_record = dict(raw_rec)
+                if "created_at" in video_record and video_record["created_at"]:
+                    video_record["created_at"] = str(video_record["created_at"])
                 logger.info(f"Saved video '{video_name}' (ID: {video_id}) with {len(chunks)} chunks into PostgreSQL.")
             except Exception as e:
                 if conn:
@@ -222,20 +224,20 @@ class PostgresDBManager:
                 "created_at": "Just now"
             }
 
-        # Tag and save to disk persistence
-        tagged_chunks = []
-        for c in chunks:
-            chunk_copy = dict(c)
-            chunk_copy['video_id'] = video_record['id']
-            chunk_copy['video_name'] = video_name
-            tagged_chunks.append(chunk_copy)
+        # Save to disk persistence only if PostgreSQL is offline
+        if not self.is_connected:
+            tagged_chunks = []
+            for c in chunks:
+                chunk_copy = dict(c)
+                chunk_copy['video_id'] = video_record['id']
+                chunk_copy['video_name'] = video_name
+                tagged_chunks.append(chunk_copy)
 
-        # Update in-memory lists & disk JSON
-        existing_ids = [v['id'] for v in self.in_memory_videos]
-        if video_record['id'] not in existing_ids:
-            self.in_memory_videos.append(video_record)
-        self.in_memory_chunks[video_record['id']] = tagged_chunks
-        self._save_disk_persistence()
+            existing_ids = [v['id'] for v in self.in_memory_videos]
+            if video_record['id'] not in existing_ids:
+                self.in_memory_videos.append(video_record)
+            self.in_memory_chunks[video_record['id']] = tagged_chunks
+            self._save_disk_persistence()
 
         return video_record
 

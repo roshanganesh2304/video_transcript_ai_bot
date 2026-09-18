@@ -17,3 +17,7 @@ backend/uploads/
 *.m4v
 *.mov
 *.avi
+
+# Logs
+*.log
+backend/server.log
